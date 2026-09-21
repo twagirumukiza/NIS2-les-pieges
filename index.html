@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les pièges à éviter dans la mise en conformité NIS2 | Innocent Twagirumukiza</title>
+  <meta name="description" content="Guide pédagogique des 8 pièges les plus courants de la conformité NIS2 et comment les éviter. Par Innocent Twagirumukiza, consultant cybersécurité & GRC.">
+  <meta name="author" content="Innocent Twagirumukiza">
+  <meta name="keywords" content="NIS2, conformité, cybersécurité, pièges, directive européenne, GRC, gestion des risques">
+
+  <meta property="og:title" content="Les pièges à éviter dans la mise en conformité NIS2">
+  <meta property="og:description" content="Guide pédagogique clair des erreurs fréquentes et comment les éviter.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://twagirumukiza.github.io/Twagirumukiza-Innocent/">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Les pièges à éviter dans la mise en conformité NIS2",
+    "author": {
+      "@type": "Person",
+      "name": "Innocent Twagirumukiza",
+      "url": "https://www.linkedin.com/in/innocent-twagirumukiza",
+      "jobTitle": "Cybersecurity & Risk Management Consultant"
+    },
+    "datePublished": "2026-09-21",
+    "description": "Article pédagogique expliquant les 8 principaux pièges de la mise en conformité NIS2 et comment les éviter."
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --text: #1a1a1a;
+      --text-secondary: #444;
+      --muted: #666;
+      --accent: #f5c518;
+      --accent-hover: #e0b000;
+      --card: #ffffff;
+      --border: #e5e5e5;
+      --header-bg: #ffffff;
+      --radius: 8px;
+      --font-size-base: 17px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    [data-theme="dark"] {
+      --bg: #111111;
+      --text: #f0f0f0;
+      --text-secondary: #cccccc;
+      --muted: #999;
+      --accent: #f5c518;
+      --accent-hover: #ffd700;
+      --card: #1c1c1c;
+      --border: #333;
+      --header-bg: #1a1a1a;
+      --shadow: 0 2px 16px rgba(0,0,0,0.35);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: var(--font-size-base);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0.7rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      white-space: nowrap;
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .nav-desktop {
+      display: flex;
+      gap: 1.4rem;
+      font-size: 0.88rem;
+    }
+
+    .nav-desktop a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-desktop a:hover { color: var(--text); }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .ctrl {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      height: 34px;
+      min-width: 34px;
+      padding: 0 0.55rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .ctrl:hover, .ctrl.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #1a1a1a;
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .burger span {
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 52px;
+      left: 0;
+      right: 0;
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0.8rem 1rem;
+      z-index: 999;
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-menu.open { display: block; }
+
+    .mobile-menu a {
+      display: block;
+      padding: 0.7rem 0.8rem;
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .mobile-menu a:hover { background: rgba(245,197,24,0.15); }
+
+    .hero {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 3rem;
+      text-align: left;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #1a1a1a;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.9rem, 5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 .hl {
+      background: var(--accent);
+      padding: 0 0.25em;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    .hero-lead {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 620px;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #1a1a1a;
+      font-weight: 700;
+      padding: 0.75rem 1.4rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta:hover { background: var(--accent-hover); }
+
+    .hero-meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .hero-meta a {
+      color: var(--accent-hover);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .hero-meta a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .section {
+      margin-bottom: 3.2rem;
+      padding-top: 0.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.9rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .section-num {
+      background: var(--accent);
+      color: #1a1a1a;
+      font-weight: 800;
+      font-size: 0.85rem;
+      width: 36px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .section h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .section h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 1.4rem 0 0.5rem;
+    }
+
+    .section p {
+      color: var(--text-secondary);
+      margin-bottom: 0.9rem;
+    }
+
+    .section ul {
+      padding-left: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .section li { margin-bottom: 0.35rem; }
+
+    .tip {
+      background: var(--card);
+      border-left: 4px solid var(--accent);
+      padding: 1.1rem 1.3rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 1.3rem 0;
+      box-shadow: var(--shadow);
+    }
+
+    .tip strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .summary-table th {
+      background: var(--accent);
+      color: #1a1a1a;
+      text-align: left;
+      padding: 0.85rem 1rem;
+      font-weight: 700;
+    }
+
+    .summary-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .summary-table tr:last-child td { border-bottom: none; }
+
+    .share-block {
+      text-align: center;
+      padding: 2.5rem 0;
+      margin: 2.5rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .share-block h3 {
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+    }
+
+    .share-icons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .share-icons a {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .share-icons a:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .share-icons a svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* CTA + Contact form */
+    .cta {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2.2rem;
+      border-radius: 12px;
+      margin: 3rem 0;
+      box-shadow: var(--shadow);
+    }
+
+    .cta h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+      text-align: center;
+    }
+
+    .cta-intro {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 1.8rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #1a1a1a;
+      font-weight: 700;
+      padding: 0.85rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      padding: 0.85rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+      font-size: 0.95rem;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: rgba(245,197,24,0.1);
+    }
+
+    .contact-form {
+      max-width: 480px;
+      margin: 0 auto;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .contact-form label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: var(--text);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card);
+      color: var(--text);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      font-family: inherit;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .contact-form textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .contact-form button[type="submit"] {
+      width: 100%;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      padding: 0.9rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .contact-form button[type="submit"]:hover {
+      background: #333;
+    }
+
+    [data-theme="dark"] .contact-form button[type="submit"] {
+      background: var(--accent);
+      color: #1a1a1a;
+    }
+
+    .form-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 0.8rem;
+    }
+
+    /* FAQ */
+    .faq { margin: 3.5rem 0 2rem; }
+
+    .faq > h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 0.7rem;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 1.1rem 1.3rem;
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .faq-q:hover { background: rgba(245,197,24,0.08); }
+
+    .faq-q span.icon {
+      font-size: 1.3rem;
+      transition: transform 0.25s;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-q span.icon { transform: rotate(45deg); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 1.3rem;
+      color: var(--text-secondary);
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 600px;
+      padding-bottom: 1.2rem;
+    }
+
+    .footer {
+      background: var(--header-bg);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-sig {
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.4rem;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .footer-links a:hover { color: var(--accent-hover); }
+
+    .footer-copy {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+
+    [data-lang="en"] .fr { display: none !important; }
+    [data-lang="fr"] .en { display: none !important; }
+
+    @media (max-width: 860px) {
+      .nav-desktop { display: none; }
+      .burger { display: flex; }
+      .hero { padding-top: 2.5rem; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body data-theme="light" data-lang="fr">
+
+  <header class="header">
+    <a href="#" class="logo">
+      <span class="logo-dot"></span>
+      Twagirumukiza
+    </a>
+
+    <nav class="nav-desktop">
+      <a href="#point1" class="fr">Périmètre</a><a href="#point1" class="en">Scope</a>
+      <a href="#point2" class="fr">Gouvernance</a><a href="#point2" class="en">Governance</a>
+      <a href="#point4" class="fr">Supply chain</a><a href="#point4" class="en">Supply chain</a>
+      <a href="#point5" class="fr">Notification</a><a href="#point5" class="en">Notification</a>
+      <a href="#faq">FAQ</a>
+      <a href="#cta" class="fr">Contact</a><a href="#cta" class="en">Contact</a>
+    </nav>
+
+    <div class="header-controls">
+      <button class="ctrl active" id="btn-fr" onclick="setLang('fr')">FR</button>
+      <button class="ctrl" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="ctrl" onclick="toggleTheme()" title="Thème">☾</button>
+      <button class="ctrl" onclick="changeFont(-1)">A−</button>
+      <button class="ctrl" onclick="changeFont(1)">A+</button>
+      <button class="burger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#intro" onclick="closeMenu()"><span class="fr">Introduction</span><span class="en">Introduction</span></a>
+    <a href="#point1" onclick="closeMenu()"><span class="fr">1. Périmètre</span><span class="en">1. Scope</span></a>
+    <a href="#point2" onclick="closeMenu()"><span class="fr">2. Gouvernance</span><span class="en">2. Governance</span></a>
+    <a href="#point3" onclick="closeMenu()"><span class="fr">3. Analyse de risques</span><span class="en">3. Risk analysis</span></a>
+    <a href="#point4" onclick="closeMenu()"><span class="fr">4. Supply chain</span><span class="en">4. Supply chain</span></a>
+    <a href="#point5" onclick="closeMenu()"><span class="fr">5. Notification</span><span class="en">5. Notification</span></a>
+    <a href="#point6" onclick="closeMenu()"><span class="fr">6. Documentation</span><span class="en">6. Documentation</span></a>
+    <a href="#point7" onclick="closeMenu()"><span class="fr">7. Capacité opérationnelle</span><span class="en">7. Operational capability</span></a>
+    <a href="#point8" onclick="closeMenu()"><span class="fr">8. Attendre</span><span class="en">8. Waiting</span></a>
+    <a href="#faq" onclick="closeMenu()">FAQ</a>
+    <a href="#cta" onclick="closeMenu()"><span class="fr">Contact</span><span class="en">Contact</span></a>
+  </div>
+
+  <section class="hero" id="intro">
+    <div class="hero-badge">
+      <span class="fr">Réflexion GRC · Cybersécurité · Conformité</span>
+      <span class="en">GRC · Cybersecurity · Compliance</span>
+    </div>
+
+    <h1>
+      <span class="fr">Les pièges à éviter dans la <span class="hl">mise en conformité NIS2</span></span>
+      <span class="en">Pitfalls to avoid in <span class="hl">NIS2 compliance</span></span>
+    </h1>
+
+    <p class="hero-lead">
+      <span class="fr">Un guide pédagogique clair pour les entreprises européennes qui veulent réussir leur conformité sans tomber dans les erreurs classiques.</span>
+      <span class="en">A clear pedagogical guide for European companies that want to succeed in their compliance without falling into classic mistakes.</span>
+    </p>
+
+    <a href="#point1" class="hero-cta">
+      <span class="fr">Explorer les 8 pièges</span>
+      <span class="en">Explore the 8 pitfalls</span>
+    </a>
+
+    <div class="hero-meta">
+      <span class="fr">Une réflexion d’</span><span class="en">A reflection by </span>
+      <strong>Innocent TWAGIRUMUKIZA</strong><br>
+      Cybersecurity &amp; Risk Management Consultant<br>
+      <a href="https://www.linkedin.com/in/innocent-twagirumukiza?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank">LinkedIn</a>
+      ·
+      <a href="https://twagirumukiza.github.io/Twagirumukiza-Innocent/" target="_blank">
+        <span class="fr">Site web</span><span class="en">Website</span>
+      </a>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <section class="section" id="point1">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="fr">Ne pas vérifier correctement si l’on est concerné</h2>
+        <h2 class="en">Not properly checking whether you are in scope</h2>
+      </div>
+      <h3 class="fr">Le piège</h3><h3 class="en">The pitfall</h3>
+      <p class="fr">Beaucoup d’organisations se disent : « On est trop petits » ou « On n’est pas une infrastructure critique ». Or NIS2 couvre 18 secteurs et s’applique dès 50 salariés ou 10 millions d’euros de chiffre d’affaires. Les fournisseurs de la chaîne d’approvisionnement peuvent aussi être indirectement concernés.</p>
+      <p class="en">Many organisations say: “We are too small” or “We are not critical infrastructure”. Yet NIS2 covers 18 sectors and applies from 50 employees or €10 million turnover. Supply chain providers can also be indirectly concerned.</p>
+      <div class="tip">
+        <strong class="fr">Comment l’éviter</strong>
+        <strong class="en">How to avoid it</strong>
+        <ul>
+          <li class="fr">Réalisez une analyse de périmètre formelle (outil national type MonEspaceNIS2).</li>
+          <li class="en">Carry out a formal scope analysis (national tool such as MonEspaceNIS2).</li>
+          <li class="fr">En cas de doute, faites valider par un juriste spécialisé.</li>
+          <li class="en">When in doubt, have it validated by a specialised lawyer.</li>
+          <li class="fr">Documentez votre conclusion.</li>
+          <li class="en">Document your conclusion.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="point2">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="fr">Considérer NIS2 comme un projet purement technique</h2>
+        <h2 class="en">Treating NIS2 as a purely technical project</h2>
+      </div>
+      <h3 class="fr">Le piège</h3><h3 class="en">The pitfall</h3>
+      <p class="fr">On confie tout à la DSI. NIS2 est avant tout une obligation de gouvernance. La direction est personnellement responsable de l’approbation et du suivi des mesures.</p>
+      <p class="en">Everything is left to the IT department. NIS2 is primarily a governance obligation. Management is personally responsible for approving and monitoring the measures.</p>
+      <div class="tip">
+        <strong class="fr">Comment l’éviter</strong>
+        <strong class="en">How to avoid it</strong>
+        <ul>
+          <li class="fr">Faites de la cybersécurité un sujet de direction générale.</li>
+          <li class="en">Make cybersecurity a board-level topic.</li>
+          <li class="fr">Organisez une formation spécifique pour les dirigeants.</li>
+          <li class="en">Organise specific training for management.</li>
+          <li class="fr">Attribuez des responsabilités nominatives et un budget dédié.</li>
+          <li class="en">Assign named responsibilities and a dedicated budget.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="point3">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="fr">Se contenter d’une analyse de risques « one-shot »</h2>
+        <h2 class="en">Settling for a one-shot risk assessment</h2>
+      </div>
+      <h3 class="fr">Le piège</h3><h3 class="en">The pitfall</h3>
+      <p class="fr">On réalise une cartographie une fois et on n’y revient plus. NIS2 exige une approche continue et adaptée à l’évolution des menaces.</p>
+      <p class="en">A risk map is done once and never revisited. NIS2 requires a continuous approach adapted to the evolving threat landscape.</p>
+      <div class="tip">
+        <strong class="fr">Comment l’éviter</strong>
+        <strong class="en">How to avoid it</strong>
+        <ul>
+          <li class="fr">Mettez en place une revue périodique (au minimum annuelle).</li>
+          <li class="en">Set up periodic reviews (at least annual).</li>
+          <li class="fr">Intégrez la gestion des vulnérabilités et le suivi des menaces.</li>
+          <li class="en">Integrate vulnerability management and threat monitoring.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="point4">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2 class="fr">Négliger la chaîne d’approvisionnement</h2>
+        <h2 class="en">Neglecting the supply chain</h2>
+      </div>
+      <h3 class="fr">Le piège</h3><h3 class="en">The pitfall</h3>
+      <p class="fr">On sécurise ses propres systèmes et on oublie les prestataires. La majorité des incidents majeurs passent par un tiers.</p>
+      <p class="en">Own systems are secured while providers are forgotten. Most major incidents go through a third party.</p>
+      <div class="tip">
+        <strong class="fr">Comment l’éviter</strong>
+        <strong class="en">How to avoid it</strong>
+        <ul>
+          <li class="fr">Cartographiez vos fournisseurs critiques.</li>
+          <li class="en">Map your critical suppliers.</li>
+          <li class="fr">Intégrez des clauses de cybersécurité dans les contrats.</li>
+          <li class="en">Include cybersecurity clauses in contracts.</li>
+          <li class="fr">Exigez des preuves et suivez les incidents chez vos prestataires.</li>
+          <li class="en">Require evidence and monitor incidents at your providers.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="point5">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2 class="fr">Sous-estimer les délais de notification d’incident</h2>
+        <h2 class="en">Underestimating incident notification deadlines</h2>
+      </div>
+      <h3 class="fr">Le piège</h3><h3 class="en">The pitfall</h3>
+      <p class="fr">NIS2 impose un rythme très strict : 24 h (alerte précoce) → 72 h (notification détaillée) → 1 mois (rapport final). Sans procédure rodée, ces délais sont presque impossibles à tenir.</p>
+      <p class="en">NIS2 requires a very strict rhythm: 24 h (early warning) → 72 h (detailed notification) → 1 month (final report). Without a practised procedure, these deadlines are almost impossible to meet.</p>
+      <div class="tip">
+        <strong class="fr">Comment l’éviter</strong>
+        <strong class="en">How to avoid it</strong>
+        <ul>
+          <li class="fr">Définissez clairement ce qu’est un incident significatif.</li>
+          <li class="en">Clearly define what constitutes a significant incident.</li>
+          <li class="fr">Créez un arbre de décision et des rôles RACI.</li>
+          <li class="en">Create a decision tree and RACI roles.</li>
+          <li class="fr">Testez régulièrement (exercices table-top).</li>
+          <li class="en">Test regularly (table-top exercises).</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="point6">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2 class="fr">Manquer de documentation et de preuves</h2>
+        <h2 class="en">Lack of documentation and evidence</h2>
+      </div>
+      <h3 class="fr">Le piège</h3><h3 class="en">The pitfall</h3>
+      <p class="fr">Les mesures existent « dans la tête ». En cas de contrôle, l’autorité demande des preuves écrites : politiques approuvées, comptes-rendus, journaux, résultats de tests.</p>
+      <p class="en">Measures exist “in people’s heads”. During an audit, the authority asks for written evidence: approved policies, minutes, logs, test results.</p>
+      <div class="tip">
+        <strong class="fr">Comment l’éviter</strong>
+        <strong class="en">How to avoid it</strong>
+        <ul>
+          <li class="fr">Centralisez la documentation (outil GRC ou structure claire).</li>
+          <li class="en">Centralise documentation (GRC tool or clear structure).</li>
+          <li class="fr">Conservez les preuves d’approbation, formations, tests et revues.</li>
+          <li class="en">Keep evidence of approvals, training, tests and reviews.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="point7">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <h2 class="fr">Confondre conformité documentaire et capacité opérationnelle</h2>
+        <h2 class="en">Confusing documentary compliance with operational capability</h2>
+      </div>
+      <h3 class="fr">Le piège</h3><h3 class="en">The pitfall</h3>
+      <p class="fr">On produit de belles politiques… qui ne sont ni appliquées ni testées. NIS2 exige des capacités démontrables : détection réelle, réponse aux incidents, continuité d’activité.</p>
+      <p class="en">Beautiful policies are produced… that are neither applied nor tested. NIS2 requires demonstrable capabilities: real detection, incident response, business continuity.</p>
+      <div class="tip">
+        <strong class="fr">Comment l’éviter</strong>
+        <strong class="en">How to avoid it</strong>
+        <ul>
+          <li class="fr">Priorisez l’opérationnalisation : détection, réponse, continuité.</li>
+          <li class="en">Prioritise operationalisation: detection, response, continuity.</li>
+          <li class="fr">Mesurez l’efficacité des mesures.</li>
+          <li class="en">Measure the effectiveness of measures.</li>
+          <li class="fr">Formez et sensibilisez régulièrement tout le personnel.</li>
+          <li class="en">Train and raise awareness regularly for all staff.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="point8">
+      <div class="section-header">
+        <span class="section-num">08</span>
+        <h2 class="fr">Attendre la transposition nationale « parfaite »</h2>
+        <h2 class="en">Waiting for the “perfect” national transposition</h2>
+      </div>
+      <h3 class="fr">Le piège</h3><h3 class="en">The pitfall</h3>
+      <p class="fr">On reporte en disant « on attend le décret final ». La directive européenne fixe déjà les grandes lignes. Les autorités attendent des mesures concrètes.</p>
+      <p class="en">Action is postponed saying “we are waiting for the final decree”. The European directive already sets the main lines. Authorities expect concrete measures.</p>
+      <div class="tip">
+        <strong class="fr">Comment l’éviter</strong>
+        <strong class="en">How to avoid it</strong>
+        <ul>
+          <li class="fr">Partez des exigences de l’article 21 de la directive.</li>
+          <li class="en">Start from the requirements of Article 21 of the directive.</li>
+          <li class="fr">Utilisez les guides techniques d’ENISA.</li>
+          <li class="en">Use ENISA technical guidance.</li>
+          <li class="fr">Lancez le diagnostic sans attendre.</li>
+          <li class="en">Launch the diagnosis without waiting.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <span class="section-num">→</span>
+        <h2 class="fr">Synthèse : les principes pour réussir</h2>
+        <h2 class="en">Summary: principles for success</h2>
+      </div>
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th class="fr">Principe</th><th class="en">Principle</th>
+            <th class="fr">Pourquoi c’est important</th><th class="en">Why it matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="fr">Gouvernance d’abord</td><td class="en">Governance first</td>
+            <td class="fr">La direction est responsable</td><td class="en">Management is accountable</td>
+          </tr>
+          <tr>
+            <td class="fr">Approche continue</td><td class="en">Continuous approach</td>
+            <td class="fr">La conformité n’est pas un projet ponctuel</td><td class="en">Compliance is not a one-off project</td>
+          </tr>
+          <tr>
+            <td class="fr">Preuves écrites</td><td class="en">Written evidence</td>
+            <td class="fr">Sans documentation, pas de conformité démontrable</td><td class="en">Without documentation, compliance cannot be demonstrated</td>
+          </tr>
+          <tr>
+            <td class="fr">Chaîne d’approvisionnement</td><td class="en">Supply chain</td>
+            <td class="fr">Le maillon faible est souvent externe</td><td class="en">The weak link is often external</td>
+          </tr>
+          <tr>
+            <td class="fr">Exercices réguliers</td><td class="en">Regular exercises</td>
+            <td class="fr">Les délais de notification ne s’improvisent pas</td><td class="en">Notification deadlines cannot be improvised</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Share -->
+    <div class="share-block">
+      <h3 class="fr">Partager cet article</h3>
+      <h3 class="en">Share this article</h3>
+      <div class="share-icons">
+        <!-- LinkedIn official -->
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://twagirumukiza.github.io/Twagirumukiza-Innocent/" target="_blank" title="LinkedIn" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <!-- WhatsApp official -->
+        <a href="https://wa.me/?text=Les%20pi%C3%A8ges%20%C3%A0%20%C3%A9viter%20dans%20la%20mise%20en%20conformit%C3%A9%20NIS2%20https://twagirumukiza.github.io/Twagirumukiza-Innocent/" target="_blank" title="WhatsApp" rel="noopener" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <!-- X official -->
+        <a href="https://twitter.com/intent/tweet?url=https://twagirumukiza.github.io/Twagirumukiza-Innocent/&text=Les%20pi%C3%A8ges%20%C3%A0%20%C3%A9viter%20dans%20la%20mise%20en%20conformit%C3%A9%20NIS2" target="_blank" title="X" rel="noopener" aria-label="X">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <!-- Bluesky -->
+        <a href="https://bsky.app/" target="_blank" title="Bluesky" rel="noopener" aria-label="Bluesky">
+          <svg viewBox="0 0 24 24"><path d="M12 10.8c-1.087-2.114-4.046-6.014-6.798-7.953C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.383 2.005-2.83 7.078 5.013.603 6.74-2.365 7.687-4.642.944 2.277 2.33 5.197 7.678 4.642 4.26-4.416.922-6.498-2.99-7.078a8.741 8.741 0 01-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.283C16.046 4.786 13.087 8.686 12 10.8z"/></svg>
+        </a>
+        <!-- Mastodon -->
+        <a href="https://mastodon.social/" target="_blank" title="Mastodon" rel="noopener" aria-label="Mastodon">
+          <svg viewBox="0 0 24 24"><path d="M23.268 8.237c-.16-1.796-.333-3.58-1.072-4.707C21.37 1.86 18.96.51 15.564.51 11.992.51 9.86 2.25 9.86 2.25s-2.133-1.74-5.704-1.74C.76.51-1.65 1.86-2.47 3.53c-.74 1.127-.913 2.911-1.072 4.707C-3.72 10.13-4 13.25-4 14.78c0 4.29 2.8 5.55 5.42 5.86 1.3.15 2.55.1 3.7-.1v-2.3c-.6.15-1.3.2-1.95.15-1.85-.15-3.3-.9-3.5-2.8-.05-.4-.05-.8 0-1.2.5 1 1.8 1.5 3.3 1.55 1.1.05 2.15-.15 3.15-.55.6-.25 1.15-.6 1.6-1.05.45.45 1 .8 1.6 1.05 1 .4 2.05.6 3.15.55 1.5-.05 2.8-.55 3.3-1.55.05.4.05.8 0 1.2-.2 1.9-1.65 2.65-3.5 2.8-.65.05-1.35 0-1.95-.15v2.3c1.15.2 2.4.25 3.7.1 2.62-.31 5.42-1.57 5.42-5.86 0-1.53-.28-4.65-.46-6.543zM7.2 14.5c-.9 0-1.65-.75-1.65-1.65V8.9c0-.9.75-1.65 1.65-1.65s1.65.75 1.65 1.65v3.95c0 .9-.75 1.65-1.65 1.65zm9.6 0c-.9 0-1.65-.75-1.65-1.65V8.9c0-.9.75-1.65 1.65-1.65s1.65.75 1.65 1.65v3.95c0 .9-.75 1.65-1.65 1.65z"/></svg>
+        </a>
+        <!-- Email -->
+        <a href="#cta" title="Email" aria-label="Email">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- CTA + Form + Cal.com -->
+    <div class="cta" id="cta">
+      <h2 class="fr">Votre entreprise doit se mettre en conformité NIS2 ?</h2>
+      <h2 class="en">Does your company need to become NIS2 compliant?</h2>
+      <p class="cta-intro fr">Je vous accompagne de façon pragmatique : diagnostic, plan d’action, gouvernance et preuves.</p>
+      <p class="cta-intro en">I support you pragmatically: diagnosis, action plan, governance and evidence.</p>
+
+      <div class="cta-buttons">
+        <a href="https://cal.com/innocent-twagirumukiza/30" target="_blank" rel="noopener" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 002 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zM7 12h5v5H7z"/></svg>
+          <span class="fr">Prendre rendez-vous (30 min)</span>
+          <span class="en">Book a 30-min call</span>
+        </a>
+        <a href="#contact-form" class="btn-secondary" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'}); setTimeout(()=>document.getElementById('name').focus(), 400); return false;">
+          <span class="fr">Ou m’écrire un message</span>
+          <span class="en">Or send me a message</span>
+        </a>
+      </div>
+
+      <form class="contact-form" id="contact-form" onsubmit="sendMail(event)">
+        <label for="name"><span class="fr">Votre nom</span><span class="en">Your name</span></label>
+        <input type="text" id="name" name="name" required placeholder="Jean Dupont">
+
+        <label for="email"><span class="fr">Votre email</span><span class="en">Your email</span></label>
+        <input type="email" id="email" name="email" required placeholder="jean@entreprise.com">
+
+        <label for="company"><span class="fr">Entreprise (optionnel)</span><span class="en">Company (optional)</span></label>
+        <input type="text" id="company" name="company" placeholder="Nom de l’entreprise">
+
+        <label for="message"><span class="fr">Message</span><span class="en">Message</span></label>
+        <textarea id="message" name="message" required placeholder="Bonjour, je souhaite échanger sur la conformité NIS2 de mon organisation..."></textarea>
+
+        <button type="submit">
+          <span class="fr">Envoyer le message</span>
+          <span class="en">Send message</span>
+        </button>
+        <p class="form-note fr">Le message s’ouvrira dans votre client mail. Aucune donnée n’est stockée sur ce site.</p>
+        <p class="form-note en">The message will open in your email client. No data is stored on this site.</p>
+      </form>
+    </div>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <h2>FAQ</h2>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="fr">Qui est concerné par NIS2 ?</span>
+          <span class="en">Who is concerned by NIS2?</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="fr">Les entités essentielles et importantes dans 18 secteurs (énergie, transport, santé, eau, services numériques, cloud, prestataires managés, etc.) dès 50 salariés ou 10 M€ de CA. Les fournisseurs critiques de ces entités peuvent aussi être concernés indirectement.</p>
+          <p class="en">Essential and important entities in 18 sectors (energy, transport, health, water, digital services, cloud, managed service providers, etc.) from 50 employees or €10 million turnover. Critical suppliers of these entities may also be indirectly concerned.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="fr">Quelles sont les sanctions en cas de non-conformité ?</span>
+          <span class="en">What are the penalties for non-compliance?</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="fr">Entités essentielles : jusqu’à 10 M€ ou 2 % du CA mondial. Entités importantes : jusqu’à 7 M€ ou 1,4 % du CA mondial. La responsabilité personnelle des dirigeants peut aussi être engagée.</p>
+          <p class="en">Essential entities: up to €10 million or 2% of global turnover. Important entities: up to €7 million or 1.4% of global turnover. Personal liability of management can also be engaged.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="fr">Quels sont les délais de notification d’un incident ?</span>
+          <span class="en">What are the incident notification deadlines?</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="fr">24 heures pour l’alerte précoce, 72 heures pour la notification détaillée, et 1 mois pour le rapport final.</p>
+          <p class="en">24 hours for the early warning, 72 hours for the detailed notification, and 1 month for the final report.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="fr">NIS2 est-il uniquement un sujet IT ?</span>
+          <span class="en">Is NIS2 only an IT topic?</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="fr">Non. C’est avant tout une obligation de gouvernance. La direction doit approuver les mesures, suivre leur mise en œuvre et suivre une formation cybersécurité.</p>
+          <p class="en">No. It is primarily a governance obligation. Management must approve the measures, monitor their implementation and undergo cybersecurity training.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="fr">Comment puis-je être accompagné ?</span>
+          <span class="en">How can I get support?</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="fr">Prenez rendez-vous via Cal.com ou utilisez le formulaire de contact ci-dessus. Je propose un diagnostic et un accompagnement pragmatique vers la conformité NIS2.</p>
+          <p class="en">Book a call via Cal.com or use the contact form above. I offer diagnosis and pragmatic support towards NIS2 compliance.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-sig">twagirumukiza</div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/innocent-twagirumukiza?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank">LinkedIn</a>
+      <a href="https://twagirumukiza.github.io/Twagirumukiza-Innocent/" target="_blank">
+        <span class="fr">Mon site</span><span class="en">My website</span>
+      </a>
+      <a href="https://cal.com/innocent-twagirumukiza/30" target="_blank">
+        <span class="fr">Prendre RDV</span><span class="en">Book a call</span>
+      </a>
+      <a href="#cta">
+        <span class="fr">Contact</span><span class="en">Contact</span>
+      </a>
+    </div>
+    <p class="footer-copy">© 2026 Innocent Twagirumukiza — Article librement partageable avec attribution.</p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const next = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      body.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+
+    function setLang(lang) {
+      document.body.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang;
+      document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      localStorage.setItem('lang', lang);
+    }
+
+    let fontSize = 17;
+    function changeFont(delta) {
+      fontSize = Math.min(22, Math.max(14, fontSize + delta));
+      document.documentElement.style.setProperty('--font-size-base', fontSize + 'px');
+      localStorage.setItem('fontSize', fontSize);
+    }
+
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+      // Re-open if it was closed
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // Camouflaged email via mailto form
+    function sendMail(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const company = document.getElementById('company').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      const subject = encodeURIComponent('Contact NIS2 – ' + (company || name));
+      const body = encodeURIComponent(
+        'Nom : ' + name + '
+' +
+        'Email : ' + email + '
+' +
+        (company ? 'Entreprise : ' + company + '
+' : '') +
+        '
+Message :
+' + message
+      );
+
+      window.location.href = 'mailto:inno.twa.ka@gmail.com?subject=' + subject + '&body=' + body;
+
+      const btn = e.target.querySelector('button[type="submit"]');
+      if (btn) {
+        const original = btn.innerHTML;
+        const isFr = document.body.getAttribute('data-lang') === 'fr';
+        btn.innerHTML = isFr ? '✓ Message prêt – ouvrez votre client mail' : '✓ Message ready – open your email client';
+        btn.style.background = '#22c55e';
+        setTimeout(() => {
+          btn.innerHTML = original;
+          btn.style.background = '';
+        }, 4000);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const theme = localStorage.getItem('theme');
+      if (theme) document.body.setAttribute('data-theme', theme);
+      const lang = localStorage.getItem('lang') || 'fr';
+      setLang(lang);
+      const fs = localStorage.getItem('fontSize');
+      if (fs) {
+        fontSize = parseInt(fs);
+        document.documentElement.style.setProperty('--font-size-base', fontSize + 'px');
+      }
+    });
+  </script>
+</body>
+</html>
