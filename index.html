@@ -657,7 +657,7 @@
   <header class="header">
     <a href="#" class="logo">
       <span class="logo-dot"></span>
-      NIS2
+      Twagirumukiza
     </a>
 
     <nav class="nav-desktop">
@@ -682,17 +682,17 @@
   </header>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#intro" onclick="closeMenu()"><span class="fr">Introduction</span><span class="en">Introduction</span></a>
-    <a href="#point1" onclick="closeMenu()"><span class="fr">1. Périmètre</span><span class="en">1. Scope</span></a>
-    <a href="#point2" onclick="closeMenu()"><span class="fr">2. Gouvernance</span><span class="en">2. Governance</span></a>
-    <a href="#point3" onclick="closeMenu()"><span class="fr">3. Analyse de risques</span><span class="en">3. Risk analysis</span></a>
-    <a href="#point4" onclick="closeMenu()"><span class="fr">4. Supply chain</span><span class="en">4. Supply chain</span></a>
-    <a href="#point5" onclick="closeMenu()"><span class="fr">5. Notification</span><span class="en">5. Notification</span></a>
-    <a href="#point6" onclick="closeMenu()"><span class="fr">6. Documentation</span><span class="en">6. Documentation</span></a>
-    <a href="#point7" onclick="closeMenu()"><span class="fr">7. Capacité opérationnelle</span><span class="en">7. Operational capability</span></a>
-    <a href="#point8" onclick="closeMenu()"><span class="fr">8. Attendre</span><span class="en">8. Waiting</span></a>
-    <a href="#faq" onclick="closeMenu()">FAQ</a>
-    <a href="#cta" onclick="closeMenu()"><span class="fr">Contact</span><span class="en">Contact</span></a>
+    <a href="#intro" onclick="scrollToSection(event, 'intro')"><span class="fr">Introduction</span><span class="en">Introduction</span></a>
+    <a href="#point1" onclick="scrollToSection(event, 'point1')"><span class="fr">1. Périmètre</span><span class="en">1. Scope</span></a>
+    <a href="#point2" onclick="scrollToSection(event, 'point2')"><span class="fr">2. Gouvernance</span><span class="en">2. Governance</span></a>
+    <a href="#point3" onclick="scrollToSection(event, 'point3')"><span class="fr">3. Analyse de risques</span><span class="en">3. Risk analysis</span></a>
+    <a href="#point4" onclick="scrollToSection(event, 'point4')"><span class="fr">4. Supply chain</span><span class="en">4. Supply chain</span></a>
+    <a href="#point5" onclick="scrollToSection(event, 'point5')"><span class="fr">5. Notification</span><span class="en">5. Notification</span></a>
+    <a href="#point6" onclick="scrollToSection(event, 'point6')"><span class="fr">6. Documentation</span><span class="en">6. Documentation</span></a>
+    <a href="#point7" onclick="scrollToSection(event, 'point7')"><span class="fr">7. Capacité opérationnelle</span><span class="en">7. Operational capability</span></a>
+    <a href="#point8" onclick="scrollToSection(event, 'point8')"><span class="fr">8. Attendre</span><span class="en">8. Waiting</span></a>
+    <a href="#faq" onclick="scrollToSection(event, 'faq')">FAQ</a>
+    <a href="#cta" onclick="scrollToSection(event, 'cta')"><span class="fr">Contact</span><span class="en">Contact</span></a>
   </div>
 
   <section class="hero" id="intro">
@@ -1135,6 +1135,15 @@
       document.getElementById('mobileMenu').classList.remove('open');
     }
 
+    function scrollToSection(e, id) {
+      e.preventDefault();
+      closeMenu();
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
     function toggleFaq(btn) {
       const item = btn.parentElement;
       const wasOpen = item.classList.contains('open');
@@ -1153,17 +1162,10 @@
       const message = document.getElementById('message').value.trim();
 
       const subject = encodeURIComponent('Contact NIS2 – ' + (company || name));
-      const body = encodeURIComponent(
-        'Nom : ' + name + '
-' +
-        'Email : ' + email + '
-' +
-        (company ? 'Entreprise : ' + company + '
-' : '') +
-        '
-Message :
-' + message
-      );
+      let bodyText = 'Nom : ' + name + '\nEmail : ' + email;
+      if (company) bodyText += '\nEntreprise : ' + company;
+      bodyText += '\n\nMessage :\n' + message;
+      const body = encodeURIComponent(bodyText);
 
       window.location.href = 'mailto:inno.twa.ka@gmail.com?subject=' + subject + '&body=' + body;
 
@@ -1173,7 +1175,7 @@ Message :
         const isFr = document.body.getAttribute('data-lang') === 'fr';
         btn.innerHTML = isFr ? '✓ Message prêt – ouvrez votre client mail' : '✓ Message ready – open your email client';
         btn.style.background = '#22c55e';
-        setTimeout(() => {
+        setTimeout(function() {
           btn.innerHTML = original;
           btn.style.background = '';
         }, 4000);
